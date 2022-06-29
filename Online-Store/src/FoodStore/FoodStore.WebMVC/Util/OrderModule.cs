@@ -13,6 +13,7 @@ namespace FoodStore.WebMVC.Util
         public override void Load()
         {
             Bind<IOrderService>().To<OrderService>();
+            Bind<IUserService>().To<UserService>();
         }
     }
 }
