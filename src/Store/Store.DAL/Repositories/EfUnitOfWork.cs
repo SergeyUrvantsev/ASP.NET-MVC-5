@@ -29,12 +29,12 @@ namespace Store.DAL.Repositories
         public ApplicationUserManager UserManager => _userManager;
 
         public ApplicationRoleManager RoleManager => _roleManager;
-        public IFoodRepository Books
+        public IFoodRepository Foods
         {
             get
             {
                 if (_foodRepository == null)
-                    _foodRepository = new _foodRepository(db);
+                    _foodRepository = new FoodRepository(db);
                 return _foodRepository;
             }
         }

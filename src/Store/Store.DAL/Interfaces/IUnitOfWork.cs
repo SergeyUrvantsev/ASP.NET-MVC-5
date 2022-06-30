@@ -11,7 +11,7 @@ namespace Store.DAL.Interfaces
     {
         ApplicationUserManager UserManager { get; }
         ApplicationRoleManager RoleManager { get; }
-        IFoodRepository Books { get; }
+        IFoodRepository Foods { get; }
         ICategoryRepository Categories { get; }
         ICartRepository Carts { get; }
         void Save();
