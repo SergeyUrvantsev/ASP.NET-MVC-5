@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Store.BLL.DTO;
 using Store.BLL.Infrastructure;
+using Store.BLL.Interfaces;
 using Store.DAL.Entities;
 using Store.DAL.Interfaces;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Store.BLL.Services
 {
-    public class FoodService
+    public class FoodService : IFoodService
     {
         private IUnitOfWork database;
         public FoodService(IUnitOfWork uow) =>
@@ -73,7 +74,7 @@ namespace Store.BLL.Services
             database.Save();
         }
 
-        public void CreateBook(FoodDTO foodDTO)
+        public void CreateFood(FoodDTO foodDTO)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<FoodDTO, Food>()).CreateMapper();
             var food = mapper.Map<FoodDTO, Food>(foodDTO);
@@ -81,7 +82,7 @@ namespace Store.BLL.Services
             database.Save();
         }
 
-        public IEnumerable<FoodDTO> GetBooks()
+        public IEnumerable<FoodDTO> GetFoods()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Food, FoodDTO>()
                 .ForMember(dto => dto.Category, src => src.MapFrom(b => b.CategorySection.CategoryName))).CreateMapper();

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Store.BLL.DTO;
+using Store.BLL.Interfaces;
 using Store.DAL.Entities;
 using Store.DAL.Interfaces;
 using System;

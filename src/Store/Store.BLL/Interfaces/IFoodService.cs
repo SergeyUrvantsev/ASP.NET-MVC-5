@@ -12,7 +12,7 @@ namespace Store.BLL.Interfaces
         IEnumerable<FoodDTO> FindFoods(string searchName);
         FoodDTO GetFood(int? id);
         IEnumerable<FoodDTO> GetFoods(string category);
-        IEnumerable<FoodDTO> GetBooks();
+        IEnumerable<FoodDTO> GetFoods();
         void DeleteFood(int id);
         void Update(FoodDTO foodDTO);
         void CreateFood(FoodDTO foodDTO);
