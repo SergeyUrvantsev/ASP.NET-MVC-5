@@ -18,6 +18,8 @@ namespace Store.WebMVC.Models
         public decimal Price { get; set; }
         public string Category { get; set; }
 
-        public string img { get; set; }
+        public byte[] ImageData { get; set; }
+        public string ImageMimeType { get; set; }
+            
     }
 }

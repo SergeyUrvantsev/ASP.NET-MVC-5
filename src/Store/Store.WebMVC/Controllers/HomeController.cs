@@ -69,6 +69,21 @@ namespace Store.WebMVC.Controllers
             return PartialView("FoodSummary", foods.ToPagedList(pageNumber, pageSize));
         }
 
+        public FileContentResult GetImage(int id)
+        {
+            var food = foodService.GetFood(id);
+
+            if (food != null & food.ImageData != null
+                & food.ImageMimeType != null & food.ImageMimeType != "")
+            {
+                return File(food.ImageData, food.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public ActionResult Autocomplete(string term)
         {
             var foods = foodService.FindFoods(term).Select(x => new { value = x.Name }).Distinct();

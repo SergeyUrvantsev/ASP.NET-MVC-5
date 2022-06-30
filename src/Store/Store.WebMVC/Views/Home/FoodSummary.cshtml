@@ -9,17 +9,25 @@
         </div>
         <div class="card-body">
             <h6 class="card-text">Category : @food.Category</h6>
-            <p class="card-text">@food.Description</p>
+            <div class="form-inline">
+                <div class="pull-left" style="margin-right: 10px">
+                    <img class="img-thumbnail" width="75" height="75"
+                         src="@Url.Action("GetImage", "Home",
+                new { food.Id })" />
+                </div>
+                <p class="card-text">@food.Description</p>
+            </div>
+                <h6 class="card-t">Price : @food.Price.ToString("# rub")</h6>
 
-            <h6 class="card-t">Price : @food.Price.ToString("# rub")</h6>
-            @Ajax.ActionLink("Add to cart", "Index", "Home", new
-            {
-                searchName = @ViewBag.searchName,
-                id = food.Id,
-                page = Model.PageNumber,
-                category = ViewBag.Category
-            },
-                     new AjaxOptions { UpdateTargetId = "updateProducts", OnSuccess = "OnSuccess" }, new { @class = "btn btn-primary btn-sm" })
+                @Ajax.ActionLink("Add to cart", "Index", "Home", new
+                {
+                    searchName = @ViewBag.searchName,
+                    id = food.Id,
+                    page = Model.PageNumber,
+                    category = ViewBag.Category
+                },
+                    new AjaxOptions { UpdateTargetId = "updateProducts", OnSuccess = "OnSuccess" },
+                    new { @class = "btn btn-primary btn-sm" })
+            </div>
         </div>
-    </div>
 }

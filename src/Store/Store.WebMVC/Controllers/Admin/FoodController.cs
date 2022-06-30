@@ -60,10 +60,17 @@ namespace Store.WebMVC.Controllers.Admin
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CreateFoodViewModel viewModel)
+        public ActionResult Edit(CreateFoodViewModel viewModel, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    viewModel.ImageMimeType = image.ContentType;
+                    viewModel.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(viewModel.ImageData, 0, image.ContentLength);
+                }
+
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CreateFoodViewModel, FoodDTO>()).CreateMapper();
                 var foodDTO = mapper.Map<CreateFoodViewModel, FoodDTO>(viewModel);
                 _foodService.Update(foodDTO);
@@ -79,6 +86,21 @@ namespace Store.WebMVC.Controllers.Admin
             viewModel.Categories = new SelectList(_categoryService.GetCategories(), "Id", "CategoryName");
             return PartialView("Edit", viewModel);
 
+        }
+
+        public FileContentResult GetImage(int id)
+        {
+            var food = _foodService.GetFood(id);
+
+            if (food != null & food.ImageData != null
+                & food.ImageMimeType != null & food.ImageMimeType != "")
+            {
+                return File(food.ImageData, food.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public ActionResult Create()
