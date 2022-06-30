@@ -14,7 +14,6 @@ namespace Store.DAL.EF
         protected override void Seed(StoreContext context)
         {
 
-
             context.Foods.Add(new Food { Id = 1, Name = "Margherita", Description = "Mozzarella cheese, red sauce, tomato", CategoryId = 1, Price = 220.00m });
             context.Foods.Add(new Food { Id = 2, Name = "Pepperoni", Description = "Pepperoni sausages, mozzarella cheese, red sauce, tomato", CategoryId = 1, Price = 220.00m });
             context.Foods.Add(new Food { Id = 3, Name = "Fried Unagi roll", Description = "Eel, cheese, rice, nori, crackers, batter", CategoryId = 2, Price = 199.00m });

@@ -22,7 +22,7 @@ namespace Store.WebMVC
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             DependencyNinjectModule orderModule = new DependencyNinjectModule();
-            ServiceModule serviceModule = new ServiceModule("DefaultConnection");
+            ServiceModule serviceModule = new ServiceModule("StoreContext");
             var kernel = new StandardKernel(orderModule, serviceModule);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }

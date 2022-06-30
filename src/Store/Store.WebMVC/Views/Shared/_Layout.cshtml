@@ -3,37 +3,56 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - FoodStore</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-dark bg-primary navbar-expand-lg sticky-top">
+        <a href="#" class="navbar-brand">FoodStore</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <input class="form-control mr-sm-2" placeholder="Книга" data-autocomplete-source='@Url.Action("Autocomplete", "Home")' name="searchName" />
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
+            }
+            @if (!User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn-outline-light btn ml-1" })
+            }
+            else
+            {
+                @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn-outline-light btn ml-1" })
+            }
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Admin Panel", "Main", "Book", null, new { @class = "btn btn-outline-light ml-1" })
+            }
+
+            <a class="btn btn-outline-light mx-1" href="@Url.Action("Index","ShoppingCart",  new { returnUrl = Request.Url.PathAndQuery })">
+                <i class="fas fa-shopping-cart mr-1"></i>Корзина
+            </a>
+
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </nav>
+    <section class="container-fluid mt-2">
+        <div class="row">
+            <div class="col-sm-2">
+                @Html.Action("GetNav", "Nav")
+            </div>
+            <div class="col-sm-10">@RenderBody()</div>
+        </div>
+    </section>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -13,6 +13,7 @@ namespace Store.DAL.Entities
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
+        public string img { get; set; }
         public Category CategorySection { get; set; }
     }
 }

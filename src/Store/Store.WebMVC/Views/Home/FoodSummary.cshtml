@@ -1,0 +1,25 @@
+﻿@model PagedList.IPagedList<Store.WebMVC.Models.FoodViewModel>
+@using PagedList.Mvc;
+
+@foreach (var food in Model)
+{
+    <div class="card my-2 w-75">
+        <div class="card-header">
+            @food.Name
+        </div>
+        <div class="card-body">
+            <h6 class="card-text">Category : @food.Category</h6>
+            <p class="card-text">@food.Description</p>
+
+            <h6 class="card-t">Price : @food.Price.ToString("# rub")</h6>
+            @Ajax.ActionLink("Add to cart", "Index", "Home", new
+            {
+                searchName = @ViewBag.searchName,
+                id = food.Id,
+                page = Model.PageNumber,
+                category = ViewBag.Category
+            },
+                     new AjaxOptions { UpdateTargetId = "updateProducts", OnSuccess = "OnSuccess" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    </div>
+}
