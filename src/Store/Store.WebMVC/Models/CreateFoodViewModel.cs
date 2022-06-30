@@ -24,6 +24,7 @@ namespace Store.WebMVC.Models
 
         public SelectList Categories { get; set; }
 
-        public string img { get; set; }
+        public byte[] ImageData { get; set; }
+        public string ImageMimeType { get; set; }
     }
 }

@@ -1,0 +1,16 @@
+﻿@model Store.WebMVC.Models.CategoryViewModel
+
+
+<h4>Добавление жанра</h4>
+@using (Html.BeginForm("Create", "Category"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label>Name</label>
+        @Html.EditorFor(m => m.CategoryName, null, new { htmlAttributes = new { @class = "form-control col-sm-4" } })
+        @Html.ValidationMessageFor(m => m.CategoryName)
+    </div>
+    <input type="submit" value="Confirm" class="btn btn-primary" />
+}
+
+

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Store.WebMVC.Models.CategoryViewModel>
+
+
+@Html.ActionLink("Add category", "Create", null, new { @class = "btn btn-primary mb-2" })
+<table class="table table-hover">
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.CategoryName</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Category", new { id = category.Id },
+                        new { @class = "viewDialog", data_dialog_title = "Category editing" })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Delete", "Delete", "Category",
+                        new { id = category.Id }, new AjaxOptions
+                             {
+                                 HttpMethod = "POST",
+                                 UpdateTargetId = "updateAdminPanel",
+                                 Confirm = "Are you sure?"
+                        })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="@Url.Content("~/Scripts/developerScripts/EditDialogScript.js")"></script>
+
+

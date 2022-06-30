@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Store.BLL.DTO;
 using Store.BLL.Infrastructure;
 using Store.BLL.Interfaces;
@@ -44,6 +45,7 @@ namespace Store.BLL.Services
                 var result = await Database.UserManager.CreateAsync(user, userDto.Password);
                 if (result.Errors.Count() > 1)
                     return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
+
                 await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
                 await Database.SaveAsync();
                 return new OperationDetails(true, "Registration completed successfully", "");
@@ -70,7 +72,12 @@ namespace Store.BLL.Services
                     await Database.RoleManager.CreateAsync(role);
                 }
             }
-            await Create(adminDto);
+
+            var admin = await Database.UserManager.FindByEmailAsync(adminDto.Email);
+            if (admin == null)
+            {
+                await Create(adminDto);
+            }
         }
     }
 }

@@ -1,0 +1,41 @@
+﻿@model Store.WebMVC.Models.MenuViewModel
+
+<style>
+
+    .default {
+        position: fixed;
+        top: 50%;
+        left: 5%;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+
+<div class="btn-group-vertical btn-group-lg">
+    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-primary" })
+    <div class="btn-group dropright">
+        <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+        </button>
+        <div class="dropdown-menu">
+            @foreach (var link in Model.Categories)
+            {
+                @Html.RouteLink(link.CategoryName, new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    category = link.CategoryName,
+                }, new
+                {
+                    @class = "dropdown-item"
+                })
+            }
+        </div>
+    </div>
+</div>
+
+<h4 class=" btn btn-success default hidden" id="success">Added to cart</h4>
+
+

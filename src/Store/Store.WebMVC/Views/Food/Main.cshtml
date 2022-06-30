@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Admin panel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="btn-group btn-group-lg mb-2">
+    @Ajax.ActionLink("Foods", "GetAllFoods", "Food", null, new AjaxOptions
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "updateAdminPanel"
+    }, new { @class = "btn btn-primary" })
+
+    @Ajax.ActionLink("Categories", "GetAllCategories", "Category", null, new AjaxOptions
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "updateAdminPanel"
+    }, new { @class = "btn btn-primary" })
+</div>
+<div id="updateAdminPanel">
+    @Html.Partial("ShowFoods")
+</div>
+
+
+

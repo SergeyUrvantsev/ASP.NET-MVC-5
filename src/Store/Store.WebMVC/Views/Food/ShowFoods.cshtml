@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Store.BLL.DTO.FoodDTO>
+
+@{
+    ViewBag.Title = "Product";
+}
+
+@Html.ActionLink("Add product", "Create", null, new { @class = "btn btn-primary mb-2" })
+
+<table class="table table-hover">
+    <tbody>
+        @foreach (var food in Model)
+        {
+            <tr>
+                <td>@food.Name</td>
+                <td>@food.Price rub</td>
+                <td>@food.Category</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Food", new { id = food.Id },
+                        new { @class = "viewDialog", data_dialog_title = "Model editing" })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Delete", "Delete", "Food",
+                         new { id = food.Id }, new AjaxOptions
+                              {
+                                  HttpMethod = "POST",
+                                  UpdateTargetId = "updateAdminPanel",
+                                  Confirm = "Are you sure?"
+                         })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="@Url.Content("~/Scripts/developerScripts/EditDialogScript.js")"></script>
+

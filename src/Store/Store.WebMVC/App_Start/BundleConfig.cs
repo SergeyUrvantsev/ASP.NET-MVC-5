@@ -8,8 +8,14 @@ namespace Store.WebMVC
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/developerScripts/Scripts.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.js",
+                        "~/Scripts/developerScripts/script.js",
+                        "~/Scripts/jquery-ui-1.13.1.min.js",
+                        "~/Scripts/popper.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -23,8 +29,10 @@ namespace Store.WebMVC
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                        "~/Content/bootstrap.min.css",
+                        "~/Content/Site.css",
+                        "~/Content/themes/base/all.css",
+                        "~/Content/themes/base/jquery-ui.css"));
         }
     }
 }

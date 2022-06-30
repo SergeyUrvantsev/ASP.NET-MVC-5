@@ -13,38 +13,42 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-primary navbar-expand-lg sticky-top">
-        <a href="#" class="navbar-brand">FoodStore</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-            </ul>
-            @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline" }))
-            {
-                <input class="form-control mr-sm-2" placeholder="Книга" data-autocomplete-source='@Url.Action("Autocomplete", "Home")' name="searchName" />
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
-            }
-            @if (!User.Identity.IsAuthenticated)
-            {
-                @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn-outline-light btn ml-1" })
-            }
-            else
-            {
-                @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn-outline-light btn ml-1" })
-            }
-            @if (User.IsInRole("admin"))
-            {
-                @Html.ActionLink("Admin Panel", "Main", "Book", null, new { @class = "btn btn-outline-light ml-1" })
-            }
+    <nav class="navbar navbar-dark bg-primary navbar-expand-lg fixed-top">
+            <a href="#" class="navbar-brand">FoodStore</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline" }))
+                {
+                    <input class="form-control mr-sm-2" placeholder="Product's name" data-autocomplete-source='@Url.Action("Autocomplete", "Home")' name="searchName" />
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                }
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn-outline-light btn ml-1" })
+                }
+                else
+                {
+                    @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn-outline-light btn ml-1" })
+                }
+                @if (User.IsInRole("admin"))
+                {
+                    @Html.ActionLink("Admin Panel", "Main", "Food", null, new { @class = "btn btn-outline-light ml-1" })
+                }
 
-            <a class="btn btn-outline-light mx-1" href="@Url.Action("Index","ShoppingCart",  new { returnUrl = Request.Url.PathAndQuery })">
-                <i class="fas fa-shopping-cart mr-1"></i>Корзина
-            </a>
+                <a class="btn btn-outline-light mx-1" href="@Url.Action("Index","ShoppingCart",  new { returnUrl = Request.Url.PathAndQuery })">
+                    <i class="fas fa-shopping-cart mr-1"></i>Cart
+                </a>
 
-        </div>
-    </nav>
+            </div>
+        </nav>
+
+   
+
+
     <section class="container-fluid mt-2">
         <div class="row">
             <div class="col-sm-2">
@@ -54,8 +58,8 @@
         </div>
     </section>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 </body>
 </html>

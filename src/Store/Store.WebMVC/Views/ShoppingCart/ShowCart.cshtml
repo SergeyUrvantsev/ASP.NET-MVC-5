@@ -1,0 +1,40 @@
+﻿@model Store.WebMVC.Models.ShoppingCartViewModel
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Count</th>
+            <th>Position</th>
+            <th>Price</th>
+            <th>Total price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.CartItems)
+        {
+            <tr>
+                <td>@line.Count</td>
+                <td>@line.Food.Name</td>
+                <td>@line.Food.Price.ToString("# rub")</td>
+                <td>@((line.Food.Price * line.Count).ToString("# rub"))</td>
+                <td>
+                    @Ajax.ActionLink("Remove", "RemoveFromCart", "ShoppingCart",
+                   new { id = line.CartItemId, returnUrl = Model.returnUrl }, new AjaxOptions
+                        {
+                            HttpMethod = "GET",
+                            UpdateTargetId = "updateCart"
+                   }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">Итоге:</td>
+            <td>
+                @Model.CartTotal.ToString("# rub")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+

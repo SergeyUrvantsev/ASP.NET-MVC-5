@@ -1,5 +1,5 @@
-﻿using BookStore.BLL.Interfaces;
-using BookStore.BLL.Services;
+﻿using Store.BLL.Interfaces;
+using Store.BLL.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -9,9 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-[assembly: OwinStartup(typeof(BookStore.App_Start.Startup))]
+[assembly: OwinStartup(typeof(Store.App_Start.Startup))]
 
-namespace BookStore.App_Start
+namespace Store.App_Start
 {
     public class Startup
     {
